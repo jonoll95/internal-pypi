@@ -7,3 +7,11 @@ docker run -d \
   -p 8080:8080 \
   -v $(pwd)/packages:/packages \
   internal-pypi
+
+sudo docker run -d \
+  --name internal-pypi \
+  --network shared-network \
+  --restart always \
+  -p 8080:8080 \
+  -v $(pwd)/packages:/packages \
+  internal-pypi
