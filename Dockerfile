@@ -8,8 +8,9 @@ LABEL description="Minimal internal PyPI server using pypiserver"
 # Set environment variables
 ENV PACKAGES_DIR=/packages
 
-# Create packages directory and install pypiserver
-RUN mkdir -p $PACKAGES_DIR \
+RUN apt-get update && apt-get install -y apache2-utils \
+    && mkdir -p /etc/pypiserver \
+    && htpasswd -cb /etc/pypiserver/.htpasswd test test \
     && pip install --no-cache-dir pypiserver passlib
 
 # Copy the htpasswd file
